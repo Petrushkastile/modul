@@ -26,6 +26,6 @@ public class Main {
             }
 
         }
-            System.out.println( "Попытки закончились" );
-        }
+        System.out.println( "Попытки закончились" );
     }
+}

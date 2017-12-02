@@ -1,47 +1,71 @@
 package Ekzameni;
 
+
 import java.util.Scanner;
 
 public class Main {
-    public static void main (String[]args){
+    public static void main(String[] args) {
 
-        Ekzameni ekzameni = new Ekzameni();
-        Abiturienti abiturient = new Abiturienti();
-        System.out.println( "Количество студентов зарегистрировавшихся на экзамены:" );
-        Scanner kolichestvo =new Scanner(System.in);
-        int a = kolichestvo.nextInt();
-        System.out.println( "Введите данные студентов" );
+        MechMat mechMat = new MechMat();
+        Lingvistik lingvistik = new Lingvistik();
+        Chemical chemical = new Chemical();
+
+
+        Scanner vibor = new Scanner( System.in );
+        Scanner names = new Scanner( System.in );
+        Scanner surnames = new Scanner( System.in );
+        Scanner ages = new Scanner( System.in );
+
+        System.out.println( "Факультеты: " + '\n' + "[1]Физико-математический " + '\n' + "[2]Лингвистики " + '\n' + "[3]Химический" + '\n' + "[4]Закончить распределение" + '\n' );
 
         int i = 0;
-  while ( i<=a-1) {    System.out.println( "Введите имя" );
-        Scanner name =new Scanner(System.in);
-        abiturient.setName( name.nextLine() );
-        System.out.println( "Введите фамилию" );
-        Scanner surname =new Scanner(System.in);
-        abiturient.setSurname( surname.nextLine() );
-        System.out.println( "Введите возраст" );
-        Scanner age =new Scanner(System.in);
-        abiturient.setAge( age.nextInt() );
-        i++;
-  }
-        int d= 0;
+        while (i != 4) {
+            System.out.println( "Выберите номер факультета!" );
+            i = vibor.nextInt();
+            switch (i) {
+                case 1:
+                    System.out.println( "Введите имя,фамилию,возраст" );
+                    mechMat.addStud( String.valueOf( new Abiturient( names.next(), surnames.next(), ages.nextInt() ) ) );
 
-  while (d<=abiturient.getStudenti().size())  {
-        System.out.println( "Студент:"+ abiturient.getStudenti().get( d ) );
-        System.out.println( "Поставьте оценку студенту по английскому"  );
-        Scanner eng =new Scanner(System.in);
-        ekzameni.setOcenkaEng( eng.nextInt() );
-        System.out.println( "Поставьте оценку студенту по математике"  );
-        Scanner mat =new Scanner(System.in);
-        ekzameni.setOcenkaMatem( mat.nextInt() );
-        System.out.println( "Поставьте оценку студенту по химии"  );
-        Scanner him =new Scanner(System.in);
-        ekzameni.setOcenkaHim( him.nextInt() );}
+                    break;
+                case 2:
+                    System.out.println( "Введите имя,фамилию,возраст" );
+                    lingvistik.addStud( String.valueOf( new Abiturient( names.next(), surnames.next(), ages.nextInt() ) ) );
+                    break;
+                case 3:
+                    System.out.println( "Введите имя,фамилию,возраст" );
+                    chemical.addStud( String.valueOf( new Abiturient( names.next(), surnames.next(), ages.nextInt() ) ) );
+                    break;
+            }
+        }
 
-        ekzameni.spisok();
+        System.out.println( "Выставление оценок по экзаменам:" );
+        System.out.println( "Факультеты: " + '\n' + "[1]Физико-математический " + '\n' + "[2]Лингвистики " + '\n' + "[3]Химический" + '\n' + "[4]Закончить выставление оценок" + '\n' );
+        int a = 0;
+        while (a != 4) {
+            System.out.println( "Выберите номер факультета!" );
+            a = vibor.nextInt();
+            switch (a) {
+                case 1:
+                    mechMat.addOcenki();
+                    break;
+                case 2:
+                    lingvistik.addOcenki();
+                    break;
+                case 3:
+                    chemical.addOcenki();
+                    break;
+            }
+        }
+
+        System.out.println( "Списки абитуриентов с итоговым средним баллом по факультетам: " );
+        System.out.println( '\n'+"Физико-математический:" + '\n' );
+        mechMat.spisok();
+        System.out.println( '\n'+"Лингвистический:" + '\n' );
+        lingvistik.spisok();
+        System.out.println( '\n'+"Химический:" + '\n' );
+        chemical.spisok();
 
     }
-
-
 
 }
